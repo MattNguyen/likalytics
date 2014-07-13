@@ -1,0 +1,19 @@
+{
+  "name": "likalytics",
+  "version": "0.0.0",
+  "description": "Analyze your photo likes.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Matthew Nguyen <mnguyen916@gmail.com>",
+  "license": "BSD",
+  "dependencies": {
+    "hapi": "~6.0.2",
+    "jade": "~1.3.1",
+    "bell": "~1.0.2",
+    "pg": "~3.3.0",
+    "bookshelf": "~0.7.6",
+    "knex": "~0.6.22"
+  }
+}
