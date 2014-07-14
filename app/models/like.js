@@ -1,5 +1,5 @@
-module.exports = function(bookshelf) {
-  bookshelf.Model.extend({
-    tableName: 'likes'
-  });
-}
+var bookshelf = require('./base');
+
+module.exports = bookshelf.extend({
+  tableName: 'likes'
+});
