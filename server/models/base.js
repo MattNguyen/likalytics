@@ -1,4 +1,4 @@
-var dbConfig = require('../../config/database');
+var dbConfig = require('../config/database');
 var knex = require('knex')(dbConfig.knex);
 var bookshelf = require('bookshelf')(knex);
 
