@@ -3,7 +3,7 @@ module.exports = {
     engines: {
       jade: require("jade")
     },
-    path: "./views"
+    path: "./app/views"
   },
   debug: {
     request: ["received"]
