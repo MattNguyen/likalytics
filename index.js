@@ -1,18 +1,12 @@
 // Setup
 var Hapi = require("hapi");
-var dbConfig = require('./config/database');
 var hapiConfig = require('./config/hapi');
-var knex = require('knex')(dbConfig.knex);
-var bookshelf = require('bookshelf')(knex);
 var server = new Hapi.Server(8080, "localhost", hapiConfig);
 
-// Exports
-module.exports.bookshelf = bookshelf;
-
 // Models
-var User = require('./app/models/user')(bookshelf);
-var Photo = require('./app/models/photo')(bookshelf);
-var Like = require('./app/models/like')(bookshelf);
+var User = require('./app/models/user');
+var Photo = require('./app/models/photo');
+var Like = require('./app/models/like');
 
 // Server
 server.pack.register(require("bell"), function(err) {
@@ -30,6 +24,25 @@ server.pack.register(require("bell"), function(err) {
     config: {
       auth: "facebook",
       handler: function(request, reply) {
+        var profile = request.auth.credentials.profile;
+        var userProfile = {
+          fid: profile.id,
+          email: profile.email.toLowerCase(),
+          first_name: profile.raw.first_name,
+          last_name: profile.raw.last_name,
+          gender: profile.raw.gender
+        };
+
+        new User(userProfile).fetch({require: true})
+          .then(function(user) {
+            console.log(user.toJSON());
+          })
+          .catch(User.NotFoundError, function() {
+            new User(userProfile).save().then(function(user) {
+              console.log(user.toJSON());
+            });
+          });
+
         return reply.redirect("/");
       }
     }
