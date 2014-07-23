@@ -9,14 +9,18 @@
   "author": "Matthew Nguyen <mnguyen916@gmail.com>",
   "license": "BSD",
   "dependencies": {
-    "hapi": "~6.0.2",
+    "hapi": "~6.2.0",
     "pg": "~3.3.0",
     "bookshelf": "~0.7.6",
     "knex": "~0.6.22",
     "bluebird": "~2.2.1",
+    "jsonwebtoken": "~0.4.1",
+    "hapi-auth-jsonwebtoken": "~0.2.1"
   },
   "devDependencies": {
     "gulp": "~3.8.6",
-    "gulp-jshint": "~1.7.1"
+    "gulp-jshint": "~1.7.1",
+    "gulp-clean": "~0.3.1",
+    "gulp-nodemon": "~1.0.4"
   }
 }

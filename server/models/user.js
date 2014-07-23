@@ -1,6 +1,7 @@
 var bookshelf = require('./base');
 
 module.exports = bookshelf.extend({
+
   tableName: 'users',
 
   photos: function() {
@@ -8,7 +9,6 @@ module.exports = bookshelf.extend({
   },
 
   likes: function() {
-    return this.hasMany(Likes)
+    return this.hasMany(Likes);
   },
-
 });
