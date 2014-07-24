@@ -2,7 +2,7 @@ var path = require('path');
 
 module.exports = {
   debug: {
-    request: ["received"]
+    request: ['received']
   },
 
   cors: true
