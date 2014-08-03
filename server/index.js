@@ -3,7 +3,7 @@
 // Setup
 var Hapi = require('hapi');
 var hapiConfig = require('./config/hapi');
-var server = new Hapi.Server(8080, 'localhost', hapiConfig);
+var server = new Hapi.Server(process.env.PORT, process.env.HOST, hapiConfig);
 
 // Models
 var User = require('./models/user');

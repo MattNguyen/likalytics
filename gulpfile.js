@@ -13,7 +13,13 @@ gulp.task('lint', function() {
 gulp.task('dev', function() {
   nodemon({
     script: './server/index.js',
-    ignore: ['gulpfile.js', 'knexfile.js', 'migrations', 'node_modules']
+    ignore: ['gulpfile.js', 'knexfile.js', 'migrations', 'node_modules'],
+    env: {
+      'NODE_ENV': 'development',
+      'PORT': 8080,
+      'HOST': 'localhost'
+    },
+    nodeArgs: ['--debug']
   })
   .on('change', ['lint']);
 });
