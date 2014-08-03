@@ -13,18 +13,12 @@ module.exports = bookshelf.extend({
 
   tableName: 'users',
 
+  defaults: {
+    sessionKey: crypto.randomBytes(16).toString('hex')
+  },
+
   initialize: function() {
-    var unsignedParams = { session_key: this.session_key, access_token: this.access_token };
-
-    if (!this.get('session_key')) {
-      this.set('session_key', crypto.randomBytes(16).toString('hex'));
-    }
-
-    if (!this.get('session_token')) {
-      this.set('session_token', jwt.sign(unsignedParams, secretKey));
-    }
-
-    return this;
+    this.on('creating', this.setSessionToken);
   },
 
   photos: function() {
@@ -34,4 +28,10 @@ module.exports = bookshelf.extend({
   likes: function() {
     return this.hasMany(Likes);
   },
+
+  setSessionToken: function() {
+    if (this.get('fid') && this.get('sessionKey')) {
+      this.set('sessionToken', jwt.sign(this.pick('fid', 'sessionKey'), secretKey));
+    }
+  }
 });
