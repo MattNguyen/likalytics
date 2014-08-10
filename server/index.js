@@ -38,7 +38,7 @@ server.pack.register(require('hapi-auth-jsonwebtoken'), function() {
       User.forge(request.payload)
       .save()
       .then(function(u) {
-        reply(u);
+        reply(u.parse(u.attributes));
       })
       .catch(function(err) {
         reply(err);
@@ -49,7 +49,16 @@ server.pack.register(require('hapi-auth-jsonwebtoken'), function() {
     method: 'GET',
     config: { auth: 'jwt' },
     handler: function(request, reply) {
-      reply(request.auth.credentials);
+      var creds = request.auth.credentials;
+      var userProfile = {
+        fid: creds.get('fid'),
+        email: creds.get('email'),
+        first_name: creds.get('firstName'),
+        last_name: creds.get('lastName'),
+        gender: creds.get('gender')
+      };
+
+      reply(userProfile);
     }
   }]);
 });
